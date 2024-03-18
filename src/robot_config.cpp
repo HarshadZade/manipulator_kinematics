@@ -43,19 +43,19 @@ void RobotConfig::loadConfiguration(const std::string& config_path)
 }
 
 // Accessor for links
-const std::vector<Link>& RobotConfig::getLinks() const
+const std::vector<Link>& RobotConfig::getLinks() const noexcept
 {
   return links_;
 }
 
 // Accessor for joints
-const std::vector<Joint>& RobotConfig::getJoints() const
+const std::vector<Joint>& RobotConfig::getJoints() const noexcept
 {
   return joints_;
 }
 
 // Accessor for number of links
-const int RobotConfig::getNumLinks() const
+const int RobotConfig::getNumLinks() const noexcept
 {
   return num_links_;
 }

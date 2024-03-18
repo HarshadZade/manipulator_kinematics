@@ -25,9 +25,9 @@ class RobotConfig
 public:
   explicit RobotConfig(const std::string& config_path);
   void loadConfiguration(const std::string& config_path);
-  const std::vector<Link>& getLinks() const;
-  const std::vector<Joint>& getJoints() const;
-  const int getNumLinks() const;
+  [[nodiscard]] const std::vector<Link>& getLinks() const noexcept;
+  [[nodiscard]] const std::vector<Joint>& getJoints() const noexcept;
+  [[nodiscard]] const int getNumLinks() const noexcept;
 
 private:
   std::vector<Link> links_;
