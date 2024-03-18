@@ -74,8 +74,10 @@ void RobotConfig::parseJoint(const YAML::Node& node)
 {
   Joint joint;
   joint.id = node["id"].as<int>();
-  joint.theta_min = node["theta_min"].as<double>();
-  joint.theta_max = node["theta_max"].as<double>();
+  double theta_min_degrees = node["theta_min"].as<double>();
+  joint.theta_min = theta_min_degrees * (M_PI / 180.0);
+  double theta_max_degrees = node["theta_max"].as<double>();
+  joint.theta_max = theta_max_degrees * (M_PI / 180.0);
   joints_.push_back(joint);
 }
 

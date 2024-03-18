@@ -21,8 +21,8 @@ TEST(RobotConfigTest, LoadsConfigurationSuccessfully)
   // Verification for joints
   ASSERT_EQ(joints.size(), 2);
   EXPECT_EQ(joints[0].id, 0);
-  EXPECT_EQ(joints[1].theta_min, -180);
-  EXPECT_EQ(joints[1].theta_max, 180);
+  EXPECT_EQ(joints[1].theta_min, -M_PI);
+  EXPECT_EQ(joints[1].theta_max, M_PI);
 
   // Verification for number of links
   EXPECT_EQ(num_links, 2);
