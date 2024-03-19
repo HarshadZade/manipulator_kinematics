@@ -39,3 +39,13 @@ cpplint --filter="-legal/copyright","-build/include_subdir" $( find . -name *.cp
 # Run cppcheck
 cppcheck --enable=all --std=c++17 -I include/ --suppress=missingInclude --inline-suppr $( find . -name *.cpp | grep -vE -e "^./build/" ) &> temp/cppcheck
 ```
+
+<!-- test build and code cov -->
+cmake -D WANT_COVERAGE=ON -D CMAKE_BUILD_TYPE=Debug -D ENABLE_TESTING=TRUE -S ./ -B build/ 
+cmake --build build/
+
+
+<!-- standard bulding wo testing -->
+cmake -S ./ -B build/
+cmake --build build/
+cmake --build build/ --clean-first

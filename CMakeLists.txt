@@ -7,6 +7,15 @@ project(manipulator_kinematics)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
+if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
+  add_compile_options(-Wall -Wextra -Wpedantic -O3)
+endif()
+
+# Add -fsanitize=address when testing is enabled
+if(ENABLE_TESTING)
+    add_compile_options(-fsanitize=address)
+endif()
+
 #
 # Fetch content for Google Test
 #
@@ -92,6 +101,8 @@ include_directories(SYSTEM ${EIGEN3_INCLUDE_DIRS})
 find_package(yaml-cpp REQUIRED)
 target_link_libraries(manipulator_kinematics PRIVATE yaml-cpp Eigen3::Eigen)
 
+if(ENABLE_TESTING)
+
 #
 # Add the test executable
 #
@@ -124,3 +135,53 @@ gtest_discover_tests(config_test)
 gtest_discover_tests(fk_test)
 gtest_discover_tests(ws_test)
 gtest_discover_tests(ik_test)
+
+#
+# Set up code coverage generation.
+# Must compile with debug, e.g,
+#   cmake -S ./ -B build/ -D CMAKE_BUILD_TYPE=Debug
+#
+option(WANT_COVERAGE "this option enable coverage" ON)
+if(NOT CMAKE_BUILD_TYPE MATCHES "Debug")
+  set(WANT_COVERAGE OFF)
+endif()
+
+if(WANT_COVERAGE)
+  message("Enabling coverage")
+  list(APPEND CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake_modules")
+  include(CodeCoverage)
+  # The following line come from cmake_modules/CodeCoverage.cmake
+  append_coverage_compiler_flags() # will add "--coverage" compilation flag
+  # Exclude certain directories from coverage analysis
+  set(COVERAGE_EXCLUDES
+    ${PROJECT_BINARY_DIR}
+    )
+endif()
+
+# create targets for building code coverage reports
+if(WANT_COVERAGE)
+  # unit test coverage:
+  setup_target_for_coverage_lcov ( # use lcov to generate coverage report
+    NAME test_coverage          # target name
+    # EXECUTABLE ctest || true    # what to run insdie the build directory?
+    #                             #   '|| true' --> continue coverage even if ctest failed
+    EXECUTABLE ctest     # what to run insdie the build directory?
+    EXCLUDE
+    #   "app/main.cpp"     # Unit test does not run app, so don't analyze it
+      "*gtest*"          # Don't analyze googleTest code
+      "/usr/include/*"   # Don't analyze system headers
+      "/usr/lib/gcc/x86_64-linux-gnu/9/include/*"   # Don't analyze system headers
+    )
+
+  # code coverage for the app (shell-app):
+  # Use gcovr insetad of lcov if you want to see branch coverage as well
+#   setup_target_for_coverage_gcovr_html ( # use gcovr to generate coverage report
+#     NAME app_coverage          # target name
+#     EXECUTABLE shell-app       # what to run insdie the build directory?
+#     EXCLUDE
+#     "test/test.cpp"    # App does not run unit test, so don't analyze it
+#     "test/main.cpp"    # App does not run unit test, so don't analyze it
+#     )
+endif()
+
+endif()
