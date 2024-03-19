@@ -100,7 +100,7 @@ const Eigen::Matrix4d ForwardKinematics::expTwist(const Eigen::VectorXd& screwAx
 // Get screw axis for a revolute joint
 const Eigen::VectorXd ForwardKinematics::getRevoluteScrewAxis(const Eigen::Vector3d& w, const Eigen::Vector3d& q) const
 {
-  Eigen::VectorXd screwAxis(6);
+  Eigen::VectorXd screwAxis(spatial_vector_size);
   screwAxis << w, -w.cross(q);
   return screwAxis;
 }
@@ -110,7 +110,7 @@ const Eigen::MatrixXd ForwardKinematics::getScrewAxes() const
 {
   // get number of links from robot_config_ and use it to initialize screwAxes
   int num_links = robot_config_.getNumLinks();
-  Eigen::MatrixXd screwAxes(6, num_links);
+  Eigen::MatrixXd screwAxes(spatial_vector_size, num_links);
 
   Eigen::Vector3d w(0, 0, 1);  // Assume all rotations are about the z-axis
   Eigen::Vector3d q(0, 0, 0);  // Starting position of the first link

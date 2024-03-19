@@ -42,6 +42,11 @@ public:
     return robot_config_;
   }
 
+  /**
+   * @brief Returns the size of the spatial vector.
+   */
+  static constexpr int spatial_vector_size = 6;
+
 private:
   RobotConfig robot_config_;  ///< Robot configuration
   //   const RobotConfig& robot_config_;  ///< Robot configuration //FIXME: should this be a reference?
