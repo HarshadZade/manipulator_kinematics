@@ -4,20 +4,31 @@
 #include <vector>
 #include "manipulator_kinematics/robot_config.h"
 
+/**
+ * @class JointState
+ * @brief Represents the state of the joints in a robotic manipulator.
+ *
+ * This class manages the joint angles of a robot manipulator, ensuring they
+ * stay within defined limits based on the robot's configuration.
+ */
 class JointState
 {
 public:
   /**
-   * @brief Constructor that initializes the JointState with RobotConfig.
-   * @param config_path Path to the YAML configuration file.
+   * @brief Constructs a JointState object with the provided RobotConfig.
+   * @param config The robot configuration specifying the number and limits of joints.
    */
   explicit JointState(const RobotConfig& config) : robot_config_(config), joint_angles_(config.getNumLinks(), 0.0)
   {
   }
 
   /**
-   * @brief Sets the joint angles of the robot arm.
-   * @param
+   * @brief Sets the angle of a specific joint, ensuring it is within limits.
+   * Throws an std::out_of_range exception if the specified angle is out of the
+   * joint's allowed range.
+   * @param joint_id The ID of the joint whose angle is to be set.
+   * @param angle The desired angle for the joint in radians.
+   * @throw std::out_of_range if the angle is outside the joint's limits.
    */
   void setJointAngle(const int joint_id, const double angle)
   {
@@ -32,7 +43,13 @@ public:
     joint_angles_.at(joint_id) = angle;
   }
 
-  // Set all joint angles
+  /**
+   * @brief Sets the angles of all joints, ensuring each is within its limits.
+   * Throws an std::out_of_range exception if any specified angle is out of its
+   * corresponding joint's allowed range.
+   * @param angles A vector of angles for the joints in radians.
+   * @throw std::out_of_range if any angle is outside its joint's limits.
+   */
   void setJointAngles(const std::vector<double>& angles)
   {
     // Check if the angles are within the joint limits
@@ -49,13 +66,20 @@ public:
     joint_angles_ = angles;
   }
 
-  // Get joint angle
+  /**
+   * @brief Retrieves the angle of a specific joint.
+   * @param joint_id The ID of the joint whose angle is to be retrieved.
+   * @return The angle of the specified joint in radians.
+   */
   [[nodiscard]] double getJointAngle(const int joint_id) const
   {
     return joint_angles_.at(joint_id);
   }
 
-  // Get all joint angles
+  /**
+   * @brief Retrieves the angles of all joints.
+   * @return A constant reference to a vector of all joint angles in radians.
+   */
   [[nodiscard]] const std::vector<double>& getJointAngles() const noexcept
   {
     return joint_angles_;
