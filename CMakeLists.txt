@@ -75,13 +75,20 @@ include_directories(
 
 add_library(manipulator_kinematics STATIC 
   src/robot_config.cpp
+  src/forward_kinematics.cpp
 )
+
+#
+# Add Eigen3
+#
+find_package(Eigen3 3.3 REQUIRED)
+include_directories(SYSTEM ${EIGEN3_INCLUDE_DIRS})
 
 #
 # yaml-cpp
 #
 find_package(yaml-cpp REQUIRED)
-target_link_libraries(manipulator_kinematics PRIVATE yaml-cpp)
+target_link_libraries(manipulator_kinematics PRIVATE yaml-cpp Eigen3::Eigen)
 
 #
 # Add the test executable
@@ -91,9 +98,15 @@ add_executable(config_test
 )
 target_link_libraries(config_test PRIVATE gtest_main manipulator_kinematics)
 
+add_executable(fk_test
+  tests/fk_test.cpp
+)
+target_link_libraries(fk_test PRIVATE gtest_main manipulator_kinematics)
+
 #
 # Enable testing and define the tests
 #
 enable_testing()
 include(GoogleTest)
 gtest_discover_tests(config_test)
+gtest_discover_tests(fk_test)
