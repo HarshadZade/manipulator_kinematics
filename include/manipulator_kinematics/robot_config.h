@@ -60,7 +60,7 @@ public:
    * @brief Gets the number of links in the robot arm.
    * @return The number of links as an integer.
    */
-  [[nodiscard]] const int getNumLinks() const noexcept;
+  [[nodiscard]] int getNumLinks() const noexcept;
 
 private:
   std::vector<Link> links_;    ///< Vector of links in the robot arm.

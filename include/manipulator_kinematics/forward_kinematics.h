@@ -56,7 +56,7 @@ private:
    * @param omega The angular velocity vector.
    * @return The corresponding skew-symmetric matrix.
    */
-  [[nodiscard]] const Eigen::Matrix3d omegaHat(const Eigen::Vector3d& omega) const;
+  [[nodiscard]] Eigen::Matrix3d omegaHat(const Eigen::Vector3d& omega) const;
 
   /**
    * @brief Computes the Rodrigues' rotation formula.
@@ -64,7 +64,7 @@ private:
    * @param theta The rotation angle in radians.
    * @return The rotation matrix computed using Rodrigues' formula.
    */
-  [[nodiscard]] const Eigen::Matrix3d rodriguesRotation(const Eigen::Matrix3d& hatOmega, double theta) const;
+  [[nodiscard]] Eigen::Matrix3d rodriguesRotation(const Eigen::Matrix3d& hatOmega, double theta) const;
 
   /**
    * @brief Calculates the translation vector for a given screw motion.
@@ -74,8 +74,8 @@ private:
    * @param theta The rotation angle in radians.
    * @return The translation vector for the screw motion.
    */
-  [[nodiscard]] const Eigen::Vector3d calculateTranslation(const Eigen::Matrix3d& R, const Eigen::Matrix3d& hatOmega,
-                                                           const Eigen::Vector3d& v, double theta) const;
+  [[nodiscard]] Eigen::Vector3d calculateTranslation(const Eigen::Matrix3d& R, const Eigen::Matrix3d& hatOmega,
+                                                     const Eigen::Vector3d& v, double theta) const;
 
   /**
    * @brief Computes the exponential of a twist.
@@ -84,7 +84,7 @@ private:
    * joints).
    * @return The homogeneous transformation matrix representing the screw motion.
    */
-  [[nodiscard]] const Eigen::Matrix4d expTwist(const Eigen::VectorXd& screwAxis, double theta) const;
+  [[nodiscard]] Eigen::Matrix4d expTwist(const Eigen::VectorXd& screwAxis, double theta) const;
 
   /**
    * @brief Performs the forward kinematics calculation.
@@ -92,7 +92,7 @@ private:
    * @param thetas The vector of joint angles/positions.
    * @return The homogeneous transformation matrix of the robot's end-effector.
    */
-  [[nodiscard]] const Eigen::Matrix4d computeFK(const Eigen::MatrixXd& screwAxes, const Eigen::VectorXd& thetas) const;
+  [[nodiscard]] Eigen::Matrix4d computeFK(const Eigen::MatrixXd& screwAxes, const Eigen::VectorXd& thetas) const;
 
   /**
    * @brief Computes the screw axis for a revolute joint.
@@ -100,13 +100,13 @@ private:
    * @param q A point through which the axis of rotation passes.
    * @return The screw axis as a 6D vector.
    */
-  [[nodiscard]] const Eigen::VectorXd getRevoluteScrewAxis(const Eigen::Vector3d& w, const Eigen::Vector3d& q) const;
+  [[nodiscard]] Eigen::VectorXd getRevoluteScrewAxis(const Eigen::Vector3d& w, const Eigen::Vector3d& q) const;
 
   /**
    * @brief Gathers the screw axes for all the joints of the robot.
    * @return A matrix where each column represents the screw axis of a joint.
    */
-  [[nodiscard]] const Eigen::MatrixXd getScrewAxes() const;
+  [[nodiscard]] Eigen::MatrixXd getScrewAxes() const;
 };
 
 #endif  // MANIPULATOR_KINEMATICS_FORWARD_KINEMATICS_H

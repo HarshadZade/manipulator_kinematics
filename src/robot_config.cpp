@@ -55,7 +55,7 @@ const std::vector<Joint>& RobotConfig::getJoints() const noexcept
 }
 
 // Accessor for number of links
-const int RobotConfig::getNumLinks() const noexcept
+int RobotConfig::getNumLinks() const noexcept
 {
   return num_links_;
 }

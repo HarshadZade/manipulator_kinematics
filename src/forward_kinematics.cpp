@@ -20,8 +20,7 @@ EEState ForwardKinematics::computeEEState(const JointState& joint_state) const
 }
 
 // Forward kinematics function
-const Eigen::Matrix4d ForwardKinematics::computeFK(const Eigen::MatrixXd& screwAxes,
-                                                   const Eigen::VectorXd& thetas) const
+Eigen::Matrix4d ForwardKinematics::computeFK(const Eigen::MatrixXd& screwAxes, const Eigen::VectorXd& thetas) const
 {
   // Initialize the transformation matrix
   Eigen::Matrix4d T = Eigen::Matrix4d::Identity();
@@ -53,7 +52,7 @@ const Eigen::Matrix4d ForwardKinematics::computeFK(const Eigen::MatrixXd& screwA
 }
 
 // Function to convert an angular velocity vector into a skew-symmetric matrix
-const Eigen::Matrix3d ForwardKinematics::omegaHat(const Eigen::Vector3d& omega) const
+Eigen::Matrix3d ForwardKinematics::omegaHat(const Eigen::Vector3d& omega) const
 {
   Eigen::Matrix3d hatOmega;
   hatOmega << 0, -omega.z(), omega.y(), omega.z(), 0, -omega.x(), -omega.y(), omega.x(), 0;
@@ -61,15 +60,15 @@ const Eigen::Matrix3d ForwardKinematics::omegaHat(const Eigen::Vector3d& omega) 
 }
 
 // Function to compute the Rodrigues' rotation formula
-const Eigen::Matrix3d ForwardKinematics::rodriguesRotation(const Eigen::Matrix3d& hatOmega, double theta) const
+Eigen::Matrix3d ForwardKinematics::rodriguesRotation(const Eigen::Matrix3d& hatOmega, double theta) const
 {
   Eigen::Matrix3d R = Eigen::Matrix3d::Identity() + sin(theta) * hatOmega + (1 - cos(theta)) * hatOmega * hatOmega;
   return R;
 }
 
 // Function to calculate the translation vector for a screw motion
-const Eigen::Vector3d ForwardKinematics::calculateTranslation(const Eigen::Matrix3d& R, const Eigen::Matrix3d& hatOmega,
-                                                              const Eigen::Vector3d& v, double theta) const
+Eigen::Vector3d ForwardKinematics::calculateTranslation(const Eigen::Matrix3d& R, const Eigen::Matrix3d& hatOmega,
+                                                        const Eigen::Vector3d& v, double theta) const
 {
   Eigen::Vector3d p =
       (Eigen::Matrix3d::Identity() * theta + (1 - cos(theta)) * hatOmega + (theta - sin(theta)) * hatOmega * hatOmega) *
@@ -78,7 +77,7 @@ const Eigen::Vector3d ForwardKinematics::calculateTranslation(const Eigen::Matri
 }
 
 // Main function to compute the exponential of a twist
-const Eigen::Matrix4d ForwardKinematics::expTwist(const Eigen::VectorXd& screwAxis, double theta) const
+Eigen::Matrix4d ForwardKinematics::expTwist(const Eigen::VectorXd& screwAxis, double theta) const
 {
   // Convert angular part to skew-symmetric matrix
   Eigen::Matrix3d hatOmega = omegaHat(screwAxis.head(3));
@@ -98,7 +97,7 @@ const Eigen::Matrix4d ForwardKinematics::expTwist(const Eigen::VectorXd& screwAx
 }
 
 // Get screw axis for a revolute joint
-const Eigen::VectorXd ForwardKinematics::getRevoluteScrewAxis(const Eigen::Vector3d& w, const Eigen::Vector3d& q) const
+Eigen::VectorXd ForwardKinematics::getRevoluteScrewAxis(const Eigen::Vector3d& w, const Eigen::Vector3d& q) const
 {
   Eigen::VectorXd screwAxis(spatial_vector_size);
   screwAxis << w, -w.cross(q);
@@ -106,7 +105,7 @@ const Eigen::VectorXd ForwardKinematics::getRevoluteScrewAxis(const Eigen::Vecto
 }
 
 // Function for screwAxes for the robot
-const Eigen::MatrixXd ForwardKinematics::getScrewAxes() const
+Eigen::MatrixXd ForwardKinematics::getScrewAxes() const
 {
   // get number of links from robot_config_ and use it to initialize screwAxes
   int num_links = robot_config_.getNumLinks();
