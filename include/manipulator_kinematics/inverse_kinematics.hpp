@@ -1,9 +1,9 @@
 #ifndef MANIPULATOR_KINEMATICS_INVERSE_KINEMATICS_H
 #define MANIPULATOR_KINEMATICS_INVERSE_KINEMATICS_H
 
-#include "manipulator_kinematics/ee_state.h"
-#include "manipulator_kinematics/joint_state.h"
-#include "manipulator_kinematics/robot_config.h"
+#include "manipulator_kinematics/ee_state.hpp"
+#include "manipulator_kinematics/joint_state.hpp"
+#include "manipulator_kinematics/robot_config.hpp"
 
 /**
  * @class InverseKinematics

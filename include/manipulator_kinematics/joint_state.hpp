@@ -3,7 +3,7 @@
 
 #include <vector>
 
-#include "manipulator_kinematics/robot_config.h"
+#include "manipulator_kinematics/robot_config.hpp"
 
 /**
  * @class JointState
