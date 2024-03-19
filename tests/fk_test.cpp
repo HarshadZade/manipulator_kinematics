@@ -1,7 +1,5 @@
 #include <gtest/gtest.h>
-
 #include <cmath>
-
 #include "manipulator_kinematics/ee_state.h"
 #include "manipulator_kinematics/joint_state.h"
 #include "manipulator_kinematics/forward_kinematics.h"
@@ -35,7 +33,6 @@ TEST_F(FKTest, Test1)
 {
   // Define a vector of joint angles
   std::vector<double> joint_angles = { 0, M_PI / 2, 0 };
-
   const auto& robot_config = fk->getRobotConfig();
   JointState joint_state(robot_config);
   joint_state.setJointAngles(joint_angles);
