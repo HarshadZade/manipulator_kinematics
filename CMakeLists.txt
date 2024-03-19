@@ -77,6 +77,7 @@ add_library(manipulator_kinematics STATIC
   src/robot_config.cpp
   src/forward_kinematics.cpp
   src/workspace.cpp
+  src/inverse_kinematics.cpp
 )
 
 #
@@ -109,6 +110,11 @@ add_executable(ws_test
 )
 target_link_libraries(ws_test PRIVATE gtest_main manipulator_kinematics)
 
+add_executable(ik_test
+  tests/ik_test.cpp
+)
+target_link_libraries(ik_test PRIVATE gtest_main manipulator_kinematics)
+
 #
 # Enable testing and define the tests
 #
@@ -117,3 +123,4 @@ include(GoogleTest)
 gtest_discover_tests(config_test)
 gtest_discover_tests(fk_test)
 gtest_discover_tests(ws_test)
+gtest_discover_tests(ik_test)

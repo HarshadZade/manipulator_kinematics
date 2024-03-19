@@ -8,7 +8,7 @@
 // Test ficture for FK tests
 class FKTest : public ::testing::Test
 {
-public:  // cppcheck-suppress unusedFunction
+public:
   void SetUp() override
   {
     try
