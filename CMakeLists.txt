@@ -76,7 +76,7 @@ include_directories(
 add_library(manipulator_kinematics STATIC 
   src/robot_config.cpp
   src/forward_kinematics.cpp
-  src/workspace.cpp
+  src/circular_workspace.cpp
   src/inverse_kinematics.cpp
 )
 
