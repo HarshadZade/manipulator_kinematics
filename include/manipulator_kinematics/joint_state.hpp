@@ -23,26 +23,6 @@ class JointState {
       : robot_config_(config), joint_angles_(config.getNumLinks(), 0.0) {}
 
   /**
-   * @brief Sets the angle of a specific joint, ensuring it is within limits.
-   * Throws an std::out_of_range exception if the specified angle is out of the
-   * joint's allowed range.
-   * @param joint_id The ID of the joint whose angle is to be set.
-   * @param angle The desired angle for the joint in radians.
-   * @throw std::out_of_range if the angle is outside the joint's limits.
-   */
-  void setJointAngle(const int joint_id, const double angle) {
-    // Check if the angle is within the joint limits
-    const Joint& joint = robot_config_.getJoints().at(joint_id);
-    if (angle < joint.theta_min || angle > joint.theta_max) {
-      std::ostringstream msg;
-      msg << "Joint angle is out of range: Joint ID = " << joint_id
-          << ", Angle = " << angle;
-      throw std::out_of_range(msg.str());
-    }
-    joint_angles_.at(joint_id) = angle;
-  }
-
-  /**
    * @brief Sets the angles of all joints, ensuring each is within its limits.
    * Throws an std::out_of_range exception if any specified angle is out of its
    * corresponding joint's allowed range.
@@ -61,15 +41,6 @@ class JointState {
       }
     }
     joint_angles_ = angles;
-  }
-
-  /**
-   * @brief Retrieves the angle of a specific joint.
-   * @param joint_id The ID of the joint whose angle is to be retrieved.
-   * @return The angle of the specified joint in radians.
-   */
-  [[nodiscard]] double getJointAngle(const int joint_id) const {
-    return joint_angles_.at(joint_id);
   }
 
   /**

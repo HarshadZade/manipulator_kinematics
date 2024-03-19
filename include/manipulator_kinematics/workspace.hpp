@@ -1,7 +1,7 @@
 #ifndef MANIPULATOR_KINEMATICS_WORKSPACE_H
 #define MANIPULATOR_KINEMATICS_WORKSPACE_H
 
-#include "manipulator_kinematics/ee_state.hpp"
+#include "manipulator_kinematics/ee_state.h"
 
 /**
  * @brief Structure to represent a circular workspace.
