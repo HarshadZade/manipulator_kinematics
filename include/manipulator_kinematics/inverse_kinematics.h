@@ -25,9 +25,9 @@ public:
   /**
    * @brief Computes the joint states given the desired end-effector state.
    * @param ee_state The desired end-effector state, including position and orientation.
-   * @return The computed joint states, including positions, velocities, and accelerations.
+   * @return A vector of all possible joint states that achieve the desired end-effector state.
    */
-  [[nodiscard]] JointState computeJointState(const EEState& ee_state) const;
+  [[nodiscard]] std::vector<JointState> computeJointState(const EEState& ee_state) const;
 
   /**
    * @brief Retrieves the robot configuration used by this instance.
