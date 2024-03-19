@@ -26,3 +26,16 @@ xdg-open docs/html/index.html
 # In the project root directory, run the following command:
 clang-format -i --style=Google $(find . -name *.cpp -o -name *.hpp | grep -vE -e "^./build/")
 ```
+
+## cppcheck and cpplint
+Install cppcheck and cpplint
+```bash
+sudo apt-get install cppcheck
+pip install cpplint
+
+# Run cpplint
+cpplint --filter="-legal/copyright","-build/include_subdir" $( find . -name *.cpp | grep -vE -e "^./build/" ) &> temp/cpplint
+
+# Run cppcheck
+cppcheck --enable=all --std=c++17 -I include/ --suppress=missingInclude --inline-suppr $( find . -name *.cpp | grep -vE -e "^./build/" ) &> temp/cppcheck
+```

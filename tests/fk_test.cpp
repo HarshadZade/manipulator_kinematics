@@ -9,7 +9,7 @@
 
 // Test ficture for FK tests
 class FKTest : public ::testing::Test {
- public:
+ public: // cppcheck-suppress unusedFunction
   void SetUp() override {
     try {
       // Load the robot configuration

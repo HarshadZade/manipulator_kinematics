@@ -52,7 +52,7 @@ Eigen::Matrix4d ForwardKinematics::computeFK(
 Eigen::Matrix3d ForwardKinematics::omegaHat(
     const Eigen::Vector3d& omega) const {
   Eigen::Matrix3d hatOmega;
-  hatOmega << 0, -omega.z(), omega.y(), omega.z(), 0, -omega.x(), -omega.y(),
+  hatOmega << 0, -omega.z(), omega.y(), omega.z(), 0, -omega.x(), -omega.y(), // cppcheck-suppress constStatement
       omega.x(), 0;
   return hatOmega;
 }
@@ -99,7 +99,7 @@ Eigen::Matrix4d ForwardKinematics::expTwist(const Eigen::VectorXd& screwAxis,
 // Get screw axis for a revolute joint
 Eigen::VectorXd ForwardKinematics::getRevoluteScrewAxis(
     const Eigen::Vector3d& w, const Eigen::Vector3d& q) const {
-  Eigen::VectorXd screwAxis(spatial_vector_size);
+  Eigen::VectorXd screwAxis(spatial_vector_size); // cppcheck-suppress constStatement
   screwAxis << w, -w.cross(q);
   return screwAxis;
 }
