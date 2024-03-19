@@ -1,9 +1,11 @@
 #include <gtest/gtest.h>
+
 #include <cmath>
-#include "manipulator_kinematics/ee_state.h"
-#include "manipulator_kinematics/joint_state.h"
-#include "manipulator_kinematics/inverse_kinematics.h"
-#include "manipulator_kinematics/robot_config.h"
+
+#include "manipulator_kinematics/ee_state.hpp"
+#include "manipulator_kinematics/inverse_kinematics.hpp"
+#include "manipulator_kinematics/joint_state.hpp"
+#include "manipulator_kinematics/robot_config.hpp"
 
 // Test ficture for IK tests
 class IKTest : public ::testing::Test

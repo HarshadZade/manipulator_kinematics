@@ -20,7 +20,8 @@ class Workspace
 {
 public:
   /**
-   * @brief Constructor that initializes the Workspace with a circular workspace.
+   * @brief Constructor that initializes the Workspace with a circular
+   * workspace.
    * @param circular_workspace Circular workspace.
    */
   explicit Workspace(const CircularWorkspace& circular_workspace) : circular_workspace_(circular_workspace)

@@ -3,10 +3,10 @@
 
 /**
  * @struct EEState
- * @brief Represents the state of the end-effector in a robotic manipulator system.
- * This structure is used to store the position and orientation of the end-effector
- * relative to some reference frame. It includes the x and y coordinates for position,
- * and thetaP for the orientation angle.
+ * @brief Represents the state of the end-effector in a robotic manipulator
+ * system. This structure is used to store the position and orientation of the
+ * end-effector relative to some reference frame. It includes the x and y
+ * coordinates for position, and thetaP for the orientation angle.
  */
 struct EEState
 {

@@ -1,7 +1,9 @@
+#include "manipulator_kinematics/robot_config.hpp"
+
 #include <gtest/gtest.h>
+
 #include <cmath>
 #include <fstream>
-#include "manipulator_kinematics/robot_config.h"
 
 auto test_config_path = "../tests/data/test_robot_config_2R.yaml";
 

@@ -15,8 +15,10 @@ class InverseKinematics
 {
 public:
   /**
-   * @brief Constructs an InverseKinematics object with the given robot configuration.
-   * @param robot_config The configuration of the robot, including link lengths and joint limits.
+   * @brief Constructs an InverseKinematics object with the given robot
+   * configuration.
+   * @param robot_config The configuration of the robot, including link lengths
+   * and joint limits.
    */
   explicit InverseKinematics(const RobotConfig& robot_config) : robot_config_(robot_config)
   {
@@ -24,8 +26,10 @@ public:
 
   /**
    * @brief Computes the joint states given the desired end-effector state.
-   * @param ee_state The desired end-effector state, including position and orientation.
-   * @return A vector of all possible joint states that achieve the desired end-effector state.
+   * @param ee_state The desired end-effector state, including position and
+   * orientation.
+   * @return A vector of all possible joint states that achieve the desired
+   * end-effector state.
    */
   [[nodiscard]] std::vector<JointState> computeJointState(const EEState& ee_state) const;
 

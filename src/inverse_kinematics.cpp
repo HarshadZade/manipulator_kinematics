@@ -1,5 +1,6 @@
+#include "manipulator_kinematics/inverse_kinematics.hpp"
+
 #include <cmath>
-#include "manipulator_kinematics/inverse_kinematics.h"
 
 // Computes the joint states given the desired end-effector state
 std::vector<JointState> InverseKinematics::computeJointState(const EEState& ee_state) const

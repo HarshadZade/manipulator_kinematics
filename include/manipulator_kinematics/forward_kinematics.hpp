@@ -1,26 +1,30 @@
 #ifndef MANIPULATOR_KINEMATICS_FORWARD_KINEMATICS_H
 #define MANIPULATOR_KINEMATICS_FORWARD_KINEMATICS_H
 
-#include <vector>
 #include <Eigen/Dense>
-#include "manipulator_kinematics/robot_config.h"
-#include "manipulator_kinematics/joint_state.h"
+#include <vector>
+
 #include "manipulator_kinematics/ee_state.h"
+#include "manipulator_kinematics/joint_state.h"
+#include "manipulator_kinematics/robot_config.h"
 
 /**
  * @class ForwardKinematics
  * @brief Performs forward kinematics calculations for a robotic manipulator.
  *
- * This class provides the functionality to compute the end-effector state of a robot
- * based on its joint states and robot configuration. It utilizes the Eigen library
- * for matrix and vector operations to perform the kinematic calculations.
+ * This class provides the functionality to compute the end-effector state of a
+ * robot based on its joint states and robot configuration. It utilizes the
+ * Eigen library for matrix and vector operations to perform the kinematic
+ * calculations.
  */
 class ForwardKinematics
 {
 public:
   /**
-   * @brief Constructs a ForwardKinematics object with the given robot configuration.
-   * @param robot_config The configuration of the robot, including link lengths and joint limits.
+   * @brief Constructs a ForwardKinematics object with the given robot
+   * configuration.
+   * @param robot_config The configuration of the robot, including link lengths
+   * and joint limits.
    */
   explicit ForwardKinematics(const RobotConfig& robot_config) : robot_config_(robot_config)
   {
@@ -28,8 +32,10 @@ public:
 
   /**
    * @brief Computes the end-effector state given the current joint states.
-   * @param joint_state The current state of the robot's joints, including positions, velocities, and accelerations.
-   * @return The computed end-effector state, including position and orientation.
+   * @param joint_state The current state of the robot's joints, including
+   * positions, velocities, and accelerations.
+   * @return The computed end-effector state, including position and
+   * orientation.
    */
   [[nodiscard]] EEState computeEEState(const JointState& joint_state) const;
 
@@ -49,7 +55,8 @@ public:
 
 private:
   RobotConfig robot_config_;  ///< Robot configuration
-  //   const RobotConfig& robot_config_;  ///< Robot configuration //FIXME: should this be a reference?
+  //   const RobotConfig& robot_config_;  ///< Robot configuration //FIXME:
+  //   should this be a reference?
 
   /**
    * @brief Converts an angular velocity vector to a skew-symmetric matrix.
@@ -80,9 +87,10 @@ private:
   /**
    * @brief Computes the exponential of a twist.
    * @param screwAxis The screw axis represented as a 6D vector.
-   * @param theta The magnitude of the twist (rotation in radians for revolute joints, translation for prismatic
-   * joints).
-   * @return The homogeneous transformation matrix representing the screw motion.
+   * @param theta The magnitude of the twist (rotation in radians for revolute
+   * joints, translation for prismatic joints).
+   * @return The homogeneous transformation matrix representing the screw
+   * motion.
    */
   [[nodiscard]] Eigen::Matrix4d expTwist(const Eigen::VectorXd& screwAxis, double theta) const;
 

@@ -2,6 +2,7 @@
 #define MANIPULATOR_KINEMATICS_JOINT_STATE_H
 
 #include <vector>
+
 #include "manipulator_kinematics/robot_config.h"
 
 /**
@@ -16,7 +17,8 @@ class JointState
 public:
   /**
    * @brief Constructs a JointState object with the provided RobotConfig.
-   * @param config The robot configuration specifying the number and limits of joints.
+   * @param config The robot configuration specifying the number and limits of
+   * joints.
    */
   explicit JointState(const RobotConfig& config) : robot_config_(config), joint_angles_(config.getNumLinks(), 0.0)
   {

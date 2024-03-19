@@ -1,10 +1,12 @@
 #include <gtest/gtest.h>
+
 #include <cmath>
-#include "manipulator_kinematics/ee_state.h"
-#include "manipulator_kinematics/joint_state.h"
-#include "manipulator_kinematics/forward_kinematics.h"
-#include "manipulator_kinematics/robot_config.h"
-#include "manipulator_kinematics/workspace.h"
+
+#include "manipulator_kinematics/ee_state.hpp"
+#include "manipulator_kinematics/forward_kinematics.hpp"
+#include "manipulator_kinematics/joint_state.hpp"
+#include "manipulator_kinematics/robot_config.hpp"
+#include "manipulator_kinematics/workspace.hpp"
 
 // Test ficture for FK tests
 class WSTest : public ::testing::Test

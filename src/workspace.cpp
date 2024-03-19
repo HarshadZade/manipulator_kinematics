@@ -1,7 +1,9 @@
+#include "manipulator_kinematics/workspace.hpp"
+
 #include <cmath>
 #include <iostream>
-#include "manipulator_kinematics/workspace.h"
-#include "manipulator_kinematics/ee_state.h"
+
+#include "manipulator_kinematics/ee_state.hpp"
 
 // Checks if the end-effector is within the workspace
 bool Workspace::isWithinWorkspace(const EEState& ee_state) const

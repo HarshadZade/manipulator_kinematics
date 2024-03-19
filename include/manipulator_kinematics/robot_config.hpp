@@ -1,9 +1,10 @@
 #ifndef MANIPULATOR_KINEMATICS_ROBOT_CONFIG_H
 #define MANIPULATOR_KINEMATICS_ROBOT_CONFIG_H
 
-#include <vector>
-#include <string>
 #include <yaml-cpp/yaml.h>
+
+#include <string>
+#include <vector>
 
 /**
  * @brief Structure to represent a single link in the robot arm.
@@ -33,7 +34,8 @@ class RobotConfig
 {
 public:
   /**
-   * @brief Constructor that initializes the RobotConfig with a configuration file.
+   * @brief Constructor that initializes the RobotConfig with a configuration
+   * file.
    * @param config_path Path to the YAML configuration file.
    */
   explicit RobotConfig(const std::string& config_path);

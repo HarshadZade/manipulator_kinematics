@@ -1,7 +1,8 @@
-#include <iostream>
-#include <fstream>
+#include "manipulator_kinematics/robot_config.hpp"
+
 #include <cmath>
-#include "manipulator_kinematics/robot_config.h"
+#include <fstream>
+#include <iostream>
 
 // Constructor
 RobotConfig::RobotConfig(const std::string& config_path)
