@@ -8,11 +8,10 @@
  * end-effector relative to some reference frame. It includes the x and y
  * coordinates for position, and thetaP for the orientation angle.
  */
-struct EEState
-{
-  double x{ 0.0 };       ///< X-coordinate of the end-effector's position.
-  double y{ 0.0 };       ///< Y-coordinate of the end-effector's position.
-  double thetaP{ 0.0 };  ///< Orientation angle of the end-effector.
+struct EEState {
+  double x{0.0};       ///< X-coordinate of the end-effector's position.
+  double y{0.0};       ///< Y-coordinate of the end-effector's position.
+  double thetaP{0.0};  ///< Orientation angle of the end-effector.
 };
 
 #endif  // MANIPULATOR_KINEMATICS_EE_STATE_H

@@ -8,8 +8,7 @@
 auto test_config_path = "../tests/data/test_robot_config_2R.yaml";
 
 // Test for successful loading of configuration file
-TEST(RobotConfigTest, LoadsConfigurationSuccessfully)
-{
+TEST(RobotConfigTest, LoadsConfigurationSuccessfully) {
   RobotConfig robotConfig(test_config_path);
   const auto& links = robotConfig.getLinks();
   const auto& joints = robotConfig.getJoints();
@@ -30,8 +29,7 @@ TEST(RobotConfigTest, LoadsConfigurationSuccessfully)
   EXPECT_EQ(num_links, 2);
 }
 
-int main(int argc, char** argv)
-{
+int main(int argc, char** argv) {
   testing::InitGoogleTest(&argc, argv);
   return RUN_ALL_TESTS();
 }

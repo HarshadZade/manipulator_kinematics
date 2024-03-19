@@ -8,21 +8,16 @@
 #include "manipulator_kinematics/robot_config.hpp"
 
 // Test ficture for FK tests
-class FKTest : public ::testing::Test
-{
-public:
-  void SetUp() override
-  {
-    try
-    {
+class FKTest : public ::testing::Test {
+ public:
+  void SetUp() override {
+    try {
       // Load the robot configuration
       RobotConfig config("../tests/data/test_robot_config_3R.yaml");
       // Create a robot object and joint state
 
       fk = std::make_unique<ForwardKinematics>(config);
-    }
-    catch (std::exception& e)
-    {
+    } catch (std::exception& e) {
       std::cerr << e.what() << std::endl;
     }
   }
@@ -31,10 +26,9 @@ public:
 };
 
 // Test case for forward kinematics
-TEST_F(FKTest, Test1)
-{
+TEST_F(FKTest, Test1) {
   // Define a vector of joint angles
-  std::vector<double> joint_angles = { 0, M_PI / 2, 0 };
+  std::vector<double> joint_angles = {0, M_PI / 2, 0};
   const auto& robot_config = fk->getRobotConfig();
   JointState joint_state(robot_config);
   joint_state.setJointAngles(joint_angles);
@@ -55,8 +49,7 @@ TEST_F(FKTest, Test1)
 
 // TODO: Add more test cases
 
-int main(int argc, char** argv)
-{
+int main(int argc, char** argv) {
   testing::InitGoogleTest(&argc, argv);
   return RUN_ALL_TESTS();
 }

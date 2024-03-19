@@ -9,8 +9,7 @@
 /**
  * @brief Structure to represent a single link in the robot arm.
  */
-struct Link
-{
+struct Link {
   int id;         ///< Link identifier.
   double length;  ///< Length of the link.
 };
@@ -18,8 +17,7 @@ struct Link
 /**
  * @brief Structure to represent a single joint in the robot arm.
  */
-struct Joint
-{
+struct Joint {
   int id;            ///< Joint identifier.
   double theta_min;  ///< Minimum theta value for the joint.
   double theta_max;  ///< Maximum theta value for the joint.
@@ -30,9 +28,8 @@ struct Joint
  * This class provides functionalities to load and access configurations of
  * a robotic manipulator from a YAML file.
  */
-class RobotConfig
-{
-public:
+class RobotConfig {
+ public:
   /**
    * @brief Constructor that initializes the RobotConfig with a configuration
    * file.
@@ -64,7 +61,7 @@ public:
    */
   [[nodiscard]] int getNumLinks() const noexcept;
 
-private:
+ private:
   std::vector<Link> links_;    ///< Vector of links in the robot arm.
   std::vector<Joint> joints_;  ///< Vector of joints in the robot arm.
   int num_links_;              ///< Number of links in the robot arm.

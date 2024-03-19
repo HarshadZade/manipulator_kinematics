@@ -20,3 +20,9 @@ cmake --build build/ --target docs
 # To view
 xdg-open docs/html/index.html
 ```
+
+## run clang-format
+```bash
+# In the project root directory, run the following command:
+clang-format -i --style=Google $(find . -name *.cpp -o -name *.hpp | grep -vE -e "^./build/")
+```
