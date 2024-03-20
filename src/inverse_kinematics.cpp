@@ -1,4 +1,4 @@
-#include "manipulator_kinematics/inverse_kinematics.hpp"
+#include "manipulator_kinematics/inverse_kinematics.hpp"  // cppcheck-suppress legal/copyright
 
 #include <cmath>
 

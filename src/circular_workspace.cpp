@@ -1,4 +1,4 @@
-#include "manipulator_kinematics/circular_workspace.hpp"
+#include "manipulator_kinematics/circular_workspace.hpp"  // cppcheck-suppress legal/copyright
 
 #include <cmath>
 #include <iostream>

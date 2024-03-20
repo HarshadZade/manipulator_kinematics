@@ -1,4 +1,4 @@
-#include "manipulator_kinematics/robot_config.hpp"
+#include "manipulator_kinematics/robot_config.hpp"  // cppcheck-suppress legal/copyright
 
 #include <gtest/gtest.h>
 

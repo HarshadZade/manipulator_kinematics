@@ -1,4 +1,4 @@
-#include "manipulator_kinematics/joint_state.hpp"
+#include "manipulator_kinematics/joint_state.hpp"  // cppcheck-suppress legal/copyright
 
 #include <sstream>
 #include <stdexcept>

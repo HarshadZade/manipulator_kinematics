@@ -1,4 +1,4 @@
-#include "manipulator_kinematics/forward_kinematics.hpp"
+#include "manipulator_kinematics/forward_kinematics.hpp"  // cppcheck-suppress legal/copyright
 
 #include <Eigen/Dense>
 #include <cmath>
