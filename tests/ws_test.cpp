@@ -64,8 +64,6 @@ TEST_F(WSTest, OutOfWorkspace) {
   EXPECT_EQ(is_ee_in_workspace, false);
 }
 
-// TODO: Add more test cases
-
 int main(int argc, char** argv) {
   testing::InitGoogleTest(&argc, argv);
   return RUN_ALL_TESTS();

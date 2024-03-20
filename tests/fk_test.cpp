@@ -47,7 +47,49 @@ TEST_F(FKTest, Test1) {
   EXPECT_NEAR(ee_state.thetaP, expectedThetaP, 1e-5);
 }
 
-// TODO: Add more test cases
+// Test case for forward kinematics
+TEST_F(FKTest, Test2) {
+  // Define a vector of joint angles
+  std::vector<double> joint_angles = {0, 0, 0};
+  const auto& robot_config = fk->getRobotConfig();
+  JointState joint_state(robot_config);
+  joint_state.setJointAngles(joint_angles);
+
+  // Compute forward kinematics
+  EEState ee_state = fk->computeEEState(joint_state);
+
+  // Expected values
+  double expectedX = 15.0;
+  double expectedY = 0.0;
+  double expectedThetaP = 0;
+
+  // Check if the computed values are within the tolerance
+  EXPECT_NEAR(ee_state.x, expectedX, 1e-5);
+  EXPECT_NEAR(ee_state.y, expectedY, 1e-5);
+  EXPECT_NEAR(ee_state.thetaP, expectedThetaP, 1e-5);
+}
+
+// Test case for forward kinematics
+TEST_F(FKTest, Test3) {
+  // Define a vector of joint angles
+  std::vector<double> joint_angles = {M_PI / 2, M_PI / 2, M_PI / 2};
+  const auto& robot_config = fk->getRobotConfig();
+  JointState joint_state(robot_config);
+  joint_state.setJointAngles(joint_angles);
+
+  // Compute forward kinematics
+  EEState ee_state = fk->computeEEState(joint_state);
+
+  // Expected values
+  double expectedX = -5.0;
+  double expectedY = 0.0;
+  double expectedThetaP = 3 * M_PI / 2;
+
+  // Check if the computed values are within the tolerance
+  EXPECT_NEAR(ee_state.x, expectedX, 1e-5);
+  EXPECT_NEAR(ee_state.y, expectedY, 1e-5);
+  EXPECT_NEAR(ee_state.thetaP, expectedThetaP, 1e-5);
+}
 
 int main(int argc, char** argv) {
   testing::InitGoogleTest(&argc, argv);
