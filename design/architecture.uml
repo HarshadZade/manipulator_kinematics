@@ -1,0 +1,86 @@
+@startuml architecture
+
+struct Link {
+  - id: int
+  - length: double
+  }
+
+struct Joint {
+  - id: int
+  - theta_min: double
+  - theta_max: double
+  }
+
+class RobotConfig{
+  - links: std::vector<Link>
+  - joints: std::vector<Joint>
+  --
+  + RobotConfig(configPath: std::string)
+  + loadConfiguration(configPath: std::string): void
+  + getLinks(): std::vector<Link> const&
+  + getJoints(): std::vector<Joint> const&
+}
+
+circle YamlConfig {}
+
+class JointState {
+  - theta: std::vector<double>
+  --
+  + JointState()
+  + setTheta(i: int, t: double): void
+  + getTheta(i: int): double
+}
+
+class EEState{
+  - double x, y, theta_p
+  --
+  + EEState(RobotConfig config)
+  + setX(double x) : void
+  + setY(double y) : void
+  + setTheta(double t) : void
+  + getX() : double
+  + getY() : double
+  + getTheta() : double
+}
+
+class ForwardKinematics{
+  + getEEPose(JointState js) : EEState
+}
+
+class WorkSpace{
+  + isEEInWorkspace(EEState ee_state) : bool
+}
+
+struct CircularWorkSpace{
+  - radius: double
+  - center_x: double
+  - center_y: double
+}
+
+class InverseKinematics{
+  + getJointState(EEState ee_state) : JointState
+}
+
+
+Note right of ForwardKinematics : unit tests
+Note right of WorkSpace : unit tests
+Note right of InverseKinematics : unit tests
+Note right of RobotConfig : unit tests
+
+ForwardKinematics *-- RobotConfig
+ForwardKinematics *-- JointState
+ForwardKinematics *-- EEState
+InverseKinematics *-- RobotConfig
+InverseKinematics *-- JointState
+InverseKinematics *-- EEState
+WorkSpace *-- EEState
+
+JointState *-- RobotConfig
+EEState *-- RobotConfig
+RobotConfig <-l- YamlConfig
+RobotConfig *-- Joint
+RobotConfig *-- Link
+WorkSpace *-- CircularWorkSpace
+
+@enduml
+```
