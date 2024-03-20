@@ -1,15 +1,15 @@
 #ifndef MANIPULATOR_KINEMATICS_ROBOT_CONFIG_H
 #define MANIPULATOR_KINEMATICS_ROBOT_CONFIG_H
 
-#include <vector>
-#include <string>
 #include <yaml-cpp/yaml.h>
+
+#include <string>
+#include <vector>
 
 /**
  * @brief Structure to represent a single link in the robot arm.
  */
-struct Link
-{
+struct Link {
   int id;         ///< Link identifier.
   double length;  ///< Length of the link.
 };
@@ -17,8 +17,7 @@ struct Link
 /**
  * @brief Structure to represent a single joint in the robot arm.
  */
-struct Joint
-{
+struct Joint {
   int id;            ///< Joint identifier.
   double theta_min;  ///< Minimum theta value for the joint.
   double theta_max;  ///< Maximum theta value for the joint.
@@ -29,11 +28,11 @@ struct Joint
  * This class provides functionalities to load and access configurations of
  * a robotic manipulator from a YAML file.
  */
-class RobotConfig
-{
-public:
+class RobotConfig {
+ public:
   /**
-   * @brief Constructor that initializes the RobotConfig with a configuration file.
+   * @brief Constructor that initializes the RobotConfig with a configuration
+   * file.
    * @param config_path Path to the YAML configuration file.
    */
   explicit RobotConfig(const std::string& config_path);
@@ -60,9 +59,9 @@ public:
    * @brief Gets the number of links in the robot arm.
    * @return The number of links as an integer.
    */
-  [[nodiscard]] const int getNumLinks() const noexcept;
+  [[nodiscard]] int getNumLinks() const noexcept;
 
-private:
+ private:
   std::vector<Link> links_;    ///< Vector of links in the robot arm.
   std::vector<Joint> joints_;  ///< Vector of joints in the robot arm.
   int num_links_;              ///< Number of links in the robot arm.
