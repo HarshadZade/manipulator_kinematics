@@ -2,27 +2,22 @@
 
 #include <cmath>
 
+#include "manipulator_kinematics/circular_workspace.hpp"
 #include "manipulator_kinematics/ee_state.hpp"
 #include "manipulator_kinematics/forward_kinematics.hpp"
 #include "manipulator_kinematics/joint_state.hpp"
 #include "manipulator_kinematics/robot_config.hpp"
-#include "manipulator_kinematics/circular_workspace.hpp"
 
 // Test ficture for FK tests
-class WSTest : public ::testing::Test
-{
-public:
-  void SetUp() override
-  {
-    try
-    {
+class WSTest : public ::testing::Test {
+ public:
+  void SetUp() override {
+    try {
       // Load the robot configuration
       RobotConfig config("../tests/data/test_robot_config_2R.yaml");
       // Create a robot object and joint state
       fk = std::make_unique<ForwardKinematics>(config);
-    }
-    catch (std::exception& e)
-    {
+    } catch (std::exception& e) {
       std::cerr << e.what() << std::endl;
     }
   }
@@ -31,10 +26,9 @@ public:
 };
 
 // Test case for forward kinematics
-TEST_F(WSTest, InWorkspace)
-{
+TEST_F(WSTest, InWorkspace) {
   // Define a vector of joint angles
-  std::vector<double> joint_angles = { 0, 0 };
+  std::vector<double> joint_angles = {0, 0};
   const auto& robot_config = fk->getRobotConfig();
   JointState joint_state(robot_config);
   joint_state.setJointAngles(joint_angles);
@@ -51,10 +45,9 @@ TEST_F(WSTest, InWorkspace)
   EXPECT_EQ(is_ee_in_workspace, true);
 }
 
-TEST_F(WSTest, OutOfWorkspace)
-{
+TEST_F(WSTest, OutOfWorkspace) {
   // Define a vector of joint angles
-  std::vector<double> joint_angles = { 0, M_PI / 2 };
+  std::vector<double> joint_angles = {0, M_PI / 2};
   const auto& robot_config = fk->getRobotConfig();
   JointState joint_state(robot_config);
   joint_state.setJointAngles(joint_angles);
@@ -73,8 +66,7 @@ TEST_F(WSTest, OutOfWorkspace)
 
 // TODO: Add more test cases
 
-int main(int argc, char** argv)
-{
+int main(int argc, char** argv) {
   testing::InitGoogleTest(&argc, argv);
   return RUN_ALL_TESTS();
 }
