@@ -43,6 +43,7 @@ cppcheck --enable=all --std=c++17 -I include/ --suppress=missingInclude --inline
 <!-- test build and code cov -->
 cmake -D WANT_COVERAGE=ON -D CMAKE_BUILD_TYPE=Debug -D ENABLE_TESTING=TRUE -S ./ -B build/ 
 cmake --build build/
+cmake --build build/ --clean-first --target all test_coverage
 
 
 <!-- standard bulding wo testing -->

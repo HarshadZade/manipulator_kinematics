@@ -32,12 +32,6 @@ class InverseKinematics {
   [[nodiscard]] std::vector<JointState> computeJointState(
       const EEState& ee_state) const;
 
-  /**
-   * @brief Retrieves the robot configuration used by this instance.
-   * @return A constant reference to the robot's configuration.
-   */
-  [[nodiscard]] const RobotConfig& getRobotConfig() const;
-
  private:
   RobotConfig robot_config_;  ///< Robot configuration
 };

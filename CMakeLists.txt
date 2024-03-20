@@ -80,17 +80,15 @@ doxygen_add_docs(docs           # target name
   ${PROJECT_SOURCE_DIR}/README.md
   )
 
-#
-# Add subdirectories
-#
-add_subdirectory(src)
-add_subdirectory(tests)
-
 if(ENABLE_TESTING)
+
+#
+# Install test data
+#
 install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/tests/data
         DESTINATION ${CMAKE_INSTALL_PREFIX}/tests)
-
 file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/tests/data DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/tests)
+
 #
 # Set up code coverage generation.
 # Must compile with debug, e.g,
@@ -139,3 +137,9 @@ if(WANT_COVERAGE)
 #     )
 endif()
 endif()
+
+#
+# Add subdirectories
+#
+add_subdirectory(src)
+add_subdirectory(tests)

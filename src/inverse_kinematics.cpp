@@ -41,8 +41,3 @@ std::vector<JointState> InverseKinematics::computeJointState(
 
   return joint_states;
 }
-
-// Retrieves the robot configuration
-const RobotConfig& InverseKinematics::getRobotConfig() const {
-  return robot_config_;
-}
