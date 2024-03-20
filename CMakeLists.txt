@@ -11,10 +11,11 @@ if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
   add_compile_options(-Wall -Wextra -Wpedantic -O3)
 endif()
 
-# # Add -fsanitize=address when testing is enabled
-# if(ENABLE_TESTING)
-#     add_compile_options(-fsanitize=address)
-# endif()
+# Add -fsanitize=address when testing is enabled
+if(ENABLE_TESTING)
+    add_compile_options(-fsanitize=address)
+    add_link_options(-fsanitize=address)
+endif()
 
 #
 # Fetch content for Google Test
@@ -26,11 +27,16 @@ FetchContent_Declare(
   GIT_TAG release-1.11.0
 )
 
+
 #
 # For simplicity, disable installing Google Test to avoid polluting the global cmake install space
 #
 set(INSTALL_GTEST OFF CACHE BOOL "" FORCE)
 FetchContent_MakeAvailable(googletest)
+
+# Enables testing for this directory and below
+enable_testing()
+include(GoogleTest)
 
 #
 # Doxygen Support check if Doxygen is installed
@@ -75,68 +81,16 @@ doxygen_add_docs(docs           # target name
   )
 
 #
-# Include directories
+# Add subdirectories
 #
-include_directories(
-  include
-  ${CMAKE_CURRENT_SOURCE_DIR}/include
-)
-
-add_library(manipulator_kinematics STATIC 
-  src/robot_config.cpp
-  src/forward_kinematics.cpp
-  src/circular_workspace.cpp
-  src/inverse_kinematics.cpp
-  src/joint_state.cpp
-)
-
-#
-# Add Eigen3
-#
-find_package(Eigen3 3.3 REQUIRED)
-include_directories(SYSTEM ${EIGEN3_INCLUDE_DIRS})
-
-#
-# yaml-cpp
-#
-find_package(yaml-cpp REQUIRED)
-target_link_libraries(manipulator_kinematics PRIVATE yaml-cpp Eigen3::Eigen)
+add_subdirectory(src)
+add_subdirectory(tests)
 
 if(ENABLE_TESTING)
+install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/tests/data
+        DESTINATION ${CMAKE_INSTALL_PREFIX}/tests)
 
-#
-# Add the test executable
-#
-add_executable(config_test
-  tests/robot_config_test.cpp
-)
-target_link_libraries(config_test PRIVATE gtest_main manipulator_kinematics)
-
-add_executable(fk_test
-  tests/fk_test.cpp
-)
-target_link_libraries(fk_test PRIVATE gtest_main manipulator_kinematics)
-
-add_executable(ws_test
-  tests/ws_test.cpp
-)
-target_link_libraries(ws_test PRIVATE gtest_main manipulator_kinematics)
-
-add_executable(ik_test
-  tests/ik_test.cpp
-)
-target_link_libraries(ik_test PRIVATE gtest_main manipulator_kinematics)
-
-#
-# Enable testing and define the tests
-#
-enable_testing()
-include(GoogleTest)
-gtest_discover_tests(config_test)
-gtest_discover_tests(fk_test)
-gtest_discover_tests(ws_test)
-gtest_discover_tests(ik_test)
-
+file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/tests/data DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/tests)
 #
 # Set up code coverage generation.
 # Must compile with debug, e.g,
@@ -184,5 +138,4 @@ if(WANT_COVERAGE)
 #     "test/main.cpp"    # App does not run unit test, so don't analyze it
 #     )
 endif()
-
 endif()

@@ -8,7 +8,7 @@ EEState ForwardKinematics::computeEEState(const JointState& joint_state) const {
   // Convert joint angles to Eigen vector // TODO: make this a helper function
   const auto& joint_angles = joint_state.getJointAngles();
   Eigen::VectorXd thetas(joint_angles.size());
-  for (int i = 0; i < joint_angles.size(); i++) {
+  for (size_t i = 0; i < joint_angles.size(); i++) {
     thetas(i) = joint_angles.at(i);
   }
 
@@ -73,8 +73,8 @@ Eigen::Matrix3d ForwardKinematics::rodriguesRotation(
 
 // Function to calculate the translation vector for a screw motion
 Eigen::Vector3d ForwardKinematics::calculateTranslation(
-    const Eigen::Matrix3d& R, const Eigen::Matrix3d& hatOmega,
-    const Eigen::Vector3d& v, double theta) const {
+    const Eigen::Matrix3d& hatOmega, const Eigen::Vector3d& v,
+    double theta) const {
   Eigen::Vector3d p =
       (Eigen::Matrix3d::Identity() * theta + (1 - cos(theta)) * hatOmega +
        (theta - sin(theta)) * hatOmega * hatOmega) *
@@ -93,7 +93,7 @@ Eigen::Matrix4d ForwardKinematics::expTwist(const Eigen::VectorXd& screwAxis,
 
   // Calculate translation vector for screw motion
   Eigen::Vector3d v(screwAxis(3), screwAxis(4), screwAxis(5));
-  Eigen::Vector3d p = calculateTranslation(R, hatOmega, v, theta);
+  Eigen::Vector3d p = calculateTranslation(hatOmega, v, theta);
 
   // Assemble into homogeneous transformation matrix
   Eigen::Matrix4d T = Eigen::Matrix4d::Identity();

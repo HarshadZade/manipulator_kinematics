@@ -5,7 +5,7 @@
 #include <cmath>
 #include <fstream>
 
-auto test_config_path = "../tests/data/test_robot_config_2R.yaml";
+auto test_config_path = "./data/test_robot_config_2R.yaml";
 
 // Test for successful loading of configuration file
 TEST(RobotConfigTest, LoadsConfigurationSuccessfully) {

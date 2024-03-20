@@ -78,8 +78,8 @@ class ForwardKinematics {
    * @return The translation vector for the screw motion.
    */
   [[nodiscard]] Eigen::Vector3d calculateTranslation(
-      const Eigen::Matrix3d& R, const Eigen::Matrix3d& hatOmega,
-      const Eigen::Vector3d& v, double theta) const;
+      const Eigen::Matrix3d& hatOmega, const Eigen::Vector3d& v,
+      double theta) const;
 
   /**
    * @brief Computes the exponential of a twist.

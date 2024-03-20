@@ -13,7 +13,7 @@ class IKTest : public ::testing::Test {
   void SetUp() override {
     try {
       // Load the robot configuration
-      RobotConfig config("../tests/data/test_robot_config_3R.yaml");
+      RobotConfig config("./data/test_robot_config_3R.yaml");
       // Create a robot object and joint state
 
       ik = std::make_unique<InverseKinematics>(config);

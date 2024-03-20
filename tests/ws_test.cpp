@@ -14,7 +14,7 @@ class WSTest : public ::testing::Test {
   void SetUp() override {
     try {
       // Load the robot configuration
-      RobotConfig config("../tests/data/test_robot_config_2R.yaml");
+      RobotConfig config("./data/test_robot_config_2R.yaml");
       // Create a robot object and joint state
       fk = std::make_unique<ForwardKinematics>(config);
     } catch (std::exception& e) {
