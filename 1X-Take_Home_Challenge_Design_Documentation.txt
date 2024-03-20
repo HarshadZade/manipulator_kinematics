@@ -1,0 +1,39 @@
+﻿Manipulator Kinematics Project Design Documentation
+====================================================
+
+Overview
+========
+This project implements the kinematic analysis of a 3R planar robotic manipulator, focusing on forward and inverse kinematics without using external libraries for kinematic calculations. It aims to demonstrate clean, reusable, extendable, and maintainable coding practices in modern C++. The design prioritizes modularity, allowing easy extension to different manipulator configurations and workspaces. It also has the readiness to evolve, accommodating future functionalities and advancements.
+
+
+Design Considerations
+=====================
+Object-Oriented Modeling
+- RobotConfig: Central to the implementation, it stores manipulator configurations, including link lengths and joint constraints. This class facilitates easy adaptation to different robot models by loading configurations from a YAML file, emphasizing flexibility in robot specification.
+- Link and Joint Structures: Defined to encapsulate properties of the manipulator's physical components, supporting the RobotConfig's comprehensive model of the manipulator.
+
+Kinematics
+- ForwardKinematics: Utilizes Screw Theory for calculating the end-effector's pose from given joint states.
+- InverseKinematics: Implements a geometric approach, allowing for the direct computation of joint angles from a desired end-effector pose and providing multiple feasible solutions. This class is designed to support algebraic and numerical solutions.
+
+State Management
+- JointState and EEState: These classes manage the state of the manipulator's joints and the end effector, respectively. They separate the manipulator's configuration and operational state, promoting code reuse and simplifying state updates and queries.
+
+Workspace Analysis
+- WorkSpace and CircularWorkSpace: The Workspace class acts as an abstract base, outlining a general interface for workspace analysis. It determines whether a given end-effector state (position and orientation) falls within the robot's defined operational workspace. This abstraction allows flexibility in implementing various workspace geometries suited to specific applications or manipulator designs. One specific implementation provided is CircularWorkspace, which models a circular area as the manipulator's workspace.
+
+Unit Testing
+- Test-Driven Development: Emphasized in the project, with unit tests for core components like ForwardKinematics, InverseKinematics, and Workspace analysis, ensuring reliability and facilitating maintenance. This can be seen from the commit history.
+
+
+Assumptions and Conventions
+===========================
+- All dimensions are in SI units (meters, radians, etc.).
+- The manipulator operates in a two-dimensional plane, simplifying the kinematic equations and analyses. (Forward kinematics, as implemented, can work well in non-planar cases.)
+- Joints allow full rotation within their defined limits without considering real-world physical constraints like collisions.
+- The sum of the joint angles represents the orientation of the end-effector (theta_p).
+
+
+Installation and Usage Instructions
+==================================
+Detailed in the README, including dependencies installation (Eigen, Google Test, Doxygen), building instructions, running tests, and generating documentation.
