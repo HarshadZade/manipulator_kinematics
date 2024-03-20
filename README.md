@@ -27,28 +27,6 @@ The software architecture is designed to be modular and extensible. The project 
 - **Eigen**: For matrix operations used in kinematics calculations.
 - **Doxygen**: For generating documentation.
 
-### Versions on my system
-#### Compiler and Tools
-
-- **Clang Version**: 10.0.0-4ubuntu1
-- **G++ Version**: 9.4.0 (Ubuntu 9.4.0-1ubuntu1~20.04.2)
-- **Clang-Format Version**: 10.0.0-4ubuntu1
-- **CMake Version**: 3.24.2
-- **Doxygen Version**: 1.8.17
-
-#### Libraries
-
-- **Eigen Version**: 3.3.7
-
-#### Language Standard
-
-- **C++ Standard**: C++17
-
-#### Operating System
-
-- **Ubuntu**: 20.04.6 LTS
-
-
 ### Installing Dependencies
 
 #### Eigen
@@ -138,6 +116,27 @@ cpplint $(find . -name *.cpp | grep -vE -e "^./build/") &> temp/cpplint
 
 ## Using Address Sanitizer
 The address sanitizer is a runtime tool that detects memory errors in C/C++ programs. It has been added to the CMake build system when gtest is enabled. 
+
+### Versions on my system
+#### Compiler and Tools
+
+- **Clang Version**: 10.0.0-4ubuntu1
+- **G++ Version**: 9.4.0 (Ubuntu 9.4.0-1ubuntu1~20.04.2)
+- **Clang-Format Version**: 10.0.0-4ubuntu1
+- **CMake Version**: 3.24.2
+- **Doxygen Version**: 1.8.17
+
+#### Libraries
+
+- **Eigen Version**: 3.3.7
+
+#### Language Standard
+
+- **C++ Standard**: C++17
+
+#### Operating System
+
+- **Ubuntu**: 20.04.6 LTS
 
 ## References
 - **Eigen**: [Eigen's Official Documentation](http://eigen.tuxfamily.org/dox/)
