@@ -142,4 +142,6 @@ endif()
 # Add subdirectories
 #
 add_subdirectory(src)
-add_subdirectory(tests)
+if(ENABLE_TESTING)
+  add_subdirectory(tests)
+endif()
