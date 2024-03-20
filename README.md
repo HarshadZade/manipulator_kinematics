@@ -21,11 +21,33 @@ The software architecture is designed to be modular and extensible. The project 
 - Joints allow full rotation within their defined limits without considering real-world physical constraints like collisions.
 
 ### Dependencies
-- **C++17 Compiler**: Ensure a modern compiler (e.g., GCC or Clang) is installed.
-- **CMake**: For building the project.
+- **C++17 Compiler**: Ensure a modern compiler (e.g., GCC or Clang) is installed. 
+- **CMake**: For building the project. (my system: cmake version 3.24.2)
 - **Google Test**: For unit testing.
 - **Eigen**: For matrix operations used in kinematics calculations.
 - **Doxygen**: For generating documentation.
+
+### Versions on my system
+#### Compiler and Tools
+
+- **Clang Version**: 10.0.0-4ubuntu1
+- **G++ Version**: 9.4.0 (Ubuntu 9.4.0-1ubuntu1~20.04.2)
+- **Clang-Format Version**: 10.0.0-4ubuntu1
+- **CMake Version**: 3.24.2
+- **Doxygen Version**: 1.8.17
+
+#### Libraries
+
+- **Eigen Version**: 3.3.7
+
+#### Language Standard
+
+- **C++ Standard**: C++17
+
+#### Operating System
+
+- **Ubuntu**: 20.04.6 LTS
+
 
 ### Installing Dependencies
 
@@ -44,12 +66,14 @@ sudo apt-get install doxygen
 ### Building the Project
 To build the project, run the following commands in the project root directory:
 ```bash
+mkdir build
 cmake -S ./ -B build/
 cmake --build build/
 ```
 
 For building with code coverage:
 ```bash
+rm -rf build
 cmake -D WANT_COVERAGE=ON -D CMAKE_BUILD_TYPE=Debug -D ENABLE_TESTING=TRUE -S ./ -B build/ 
 cmake --build build/ --target all test_coverage
 ```
@@ -59,7 +83,14 @@ xdg-open build/test_coverage/index.html
 ```
 
 ### Running Tests
-To run the unit tests, navigate to the `build/` directory and use CTest (installed with CMake):
+Build tests instructions:
+```bash
+rm -rf build
+cmake -D WANT_COVERAGE=ON -D CMAKE_BUILD_TYPE=Debug -D ENABLE_TESTING=TRUE -S ./ -B build/
+cmake --build build/
+```
+
+To run the unit tests, navigate to the `build/` directory and use CTest (installed with CMake).
 ```bash
 cd build/
 ctest
@@ -73,6 +104,8 @@ In the project root directory, run the following command:
 
 ```bash
 mkdir docs
+rm -rf build 
+cmake -S ./ -B build/
 cmake --build build/ --target docs
 ```
 
