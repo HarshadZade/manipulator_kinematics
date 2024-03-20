@@ -18,6 +18,11 @@ EEState ForwardKinematics::computeEEState(const JointState& joint_state) const {
   return {.x = T(0, 3), .y = T(1, 3), .thetaP = thetas.sum()};
 }
 
+// Function to get the robot configuration
+const RobotConfig& ForwardKinematics::getRobotConfig() const {
+  return robot_config_;
+}
+
 // Forward kinematics function
 Eigen::Matrix4d ForwardKinematics::computeFK(
     const Eigen::MatrixXd& screwAxes, const Eigen::VectorXd& thetas) const {

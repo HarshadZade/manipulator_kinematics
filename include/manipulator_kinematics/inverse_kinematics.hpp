@@ -36,9 +36,7 @@ class InverseKinematics {
    * @brief Retrieves the robot configuration used by this instance.
    * @return A constant reference to the robot's configuration.
    */
-  [[nodiscard]] const RobotConfig& getRobotConfig() const {
-    return robot_config_;
-  }
+  [[nodiscard]] const RobotConfig& getRobotConfig() const;
 
  private:
   RobotConfig robot_config_;  ///< Robot configuration

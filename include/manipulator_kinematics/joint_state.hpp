@@ -29,31 +29,16 @@ class JointState {
    * @param angles A vector of angles for the joints in radians.
    * @throw std::out_of_range if any angle is outside its joint's limits.
    */
-  void setJointAngles(const std::vector<double>& angles) {
-    // Check if the angles are within the joint limits
-    for (int i = 0; i < angles.size(); i++) {
-      const Joint& joint = robot_config_.getJoints().at(i);
-      if (angles.at(i) < joint.theta_min || angles.at(i) > joint.theta_max) {
-        std::ostringstream msg;
-        msg << "Joint angle is out of range: Joint ID = " << i
-            << ", Angle = " << angles.at(i);
-        throw std::out_of_range(msg.str());
-      }
-    }
-    joint_angles_ = angles;
-  }
+  void setJointAngles(const std::vector<double>& angles);
 
   /**
    * @brief Retrieves the angles of all joints.
    * @return A constant reference to a vector of all joint angles in radians.
    */
-  [[nodiscard]] const std::vector<double>& getJointAngles() const noexcept {
-    return joint_angles_;
-  }
+  [[nodiscard]] const std::vector<double>& getJointAngles() const noexcept;
 
  private:
   const RobotConfig& robot_config_;  ///< Reference to the RobotConfig object.
-  //   RobotConfig robot_config_;     ///< RobotConfig object.
   std::vector<double>
       joint_angles_;  ///< Vector of joint angles in the robot arm.
 };

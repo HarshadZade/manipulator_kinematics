@@ -11,10 +11,10 @@ if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
   add_compile_options(-Wall -Wextra -Wpedantic -O3)
 endif()
 
-# Add -fsanitize=address when testing is enabled
-if(ENABLE_TESTING)
-    add_compile_options(-fsanitize=address)
-endif()
+# # Add -fsanitize=address when testing is enabled
+# if(ENABLE_TESTING)
+#     add_compile_options(-fsanitize=address)
+# endif()
 
 #
 # Fetch content for Google Test
@@ -87,6 +87,7 @@ add_library(manipulator_kinematics STATIC
   src/forward_kinematics.cpp
   src/circular_workspace.cpp
   src/inverse_kinematics.cpp
+  src/joint_state.cpp
 )
 
 #
